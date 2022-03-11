@@ -46,13 +46,33 @@ namespace Styx.Bot.CustomBots
              }
 
          }
-    }
+   
 
-}
+
 
         public override void Initialize()
+            {
+             BotEvents.Player.OnMapChanged += Player_OnMapChanged;
+             }
+
+        private void Player_OnMapChanged(BotEvents.Player.MapChangedEventArgs args)
         {
-            
+            _root = null; 
         }
+
+        public override void Pulse(){}
+
+        public override PulseFlags Pulseflags 
+        {
+             get { return PulseFlags.All;}
+        }
+
+        public override void Start()
+        {
+            Targeting.Instance.IncludeTargetsFilter += IncludeTargetsFilter;
+
+        }
+    }
+}
 
 #endregion
