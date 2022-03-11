@@ -25,5 +25,34 @@ namespace Styx.Bot.CustomBots
     {
         [DllImport("user32.dll")]
         static extern short GetAsyncKeyState(System.Windows.Forms.Keys vKey);
+    
+        #region Overrides of BotBase
+
+        public override string Name 
+        {
+            get { return "CombatBot"; }
+        }    
+
+        private Composite _root;
+        public override Composite Root
+        {
+            get 
+            {
+                return _root ?? (_root =
+                    new PrioritySelector(
+                        CreateCombatBehavior()
+                        )
+                    );
+             }
+
+         }
     }
+
 }
+
+        public override void Initialize()
+        {
+            
+        }
+
+#endregion
